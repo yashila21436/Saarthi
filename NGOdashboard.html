@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Sign up - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/bs-theme-overrides.css">
+</head>
+<script>
+    // Function to extract user details from URL query parameters
+    function getUserDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('ngoId');
+        const userName = urlParams.get('ngoName');
+
+        return { Id: userId, Name: userName };
+    }
+
+    // Function to dynamically generate link to About section with user details
+    function generateAboutLink() {
+        const userDetails = getUserDetails();
+        const aboutLink = `about_ngo.html?ngoId=${encodeURIComponent(userDetails.Id)}&ngoName=${encodeURIComponent(userDetails.Name)}`;
+        return aboutLink;
+    }
+
+    function generateProjectLink(){
+        const userDetails = getUserDetails();
+        const userLink = `projects_ngo.html?ngoId=${encodeURIComponent(userDetails.Id)}&ngoName=${encodeURIComponent(userDetails.Name)}`;
+        return userLink;
+
+    }
+
+    function generateFaq(){
+        const userDetails = getUserDetails();
+        const userLink = `faq_html.html?ngoId=${encodeURIComponent(userDetails.Id)}&ngoName=${encodeURIComponent(userDetails.Name)}`;
+        return userLink;
+
+    }
+
+    function generateindex(){
+        const userDetails = getUserDetails();
+        const userLink = `index_NGO.html?ngoId=${encodeURIComponent(userDetails.Id)}&ngoName=${encodeURIComponent(userDetails.Name)}`;
+        return userLink;
+
+
+    }
+</script>
+
+<body>
+    <nav class="navbar navbar-expand-md sticky-top py-3 navbar-dark" id="mainNav" style="padding-right: 0px;margin-right: 1px;">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="indexLogin.html"><span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon" style="background: var(--bs-body-bg);"><img src="assets/img/SAARTHI%20LOGO%201.png" width="33" height="33"></span><span>Saarthi</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-3">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="location.href = generateindex()">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="location.href = generateAboutLink()">About</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="projectsLink" href="javascript:void(0)" onclick="location.href = generateProjectLink()">Projects</a>
+                    </li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="location.href = generateFaq()">FAQs</a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <div></div><a class="btn btn-primary shadow" role="button" href="loginNgo.html" style="color: rgb(255,255,255);">Sign out</a>
+            </div>
+        </div>
+    </nav>
+    <section class="py-5" style="background: #19181d;">
+        <div class="container py-5">
+            <div class="row mb-4 mb-lg-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 class="fw-bold">Welcome, <span id="ngoName"></span>!</h2><span style="color: #f78533;font-weight: bold;">Non-governmental organization</span>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div></div>
+                </div>
+                <div class="col-md-4"><button class="btn btn-primary" type="button" style="text-align: center;margin-top: 0px;margin-left: 110px;color: rgb(255,255,255);" data-bs-toggle="modal" data-bs-target="#projectModal">Create a posting</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-dark fixed-bottom">
+        <div class="container py-4 py-lg-5">
+            <hr>
+            <div class="text-muted d-flex justify-content-between align-items-center pt-3">
+                <p class="mb-0">Copyright © 2024 by Aditi, Kanishk, Rahul &amp; Yashila</p>
+                <ul class="list-inline mb-0"></ul>
+            </div>
+        </div>
+    </footer>
+    <div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="projectModalLabel">Create New Project</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="projectForm" action="http://localhost:3000/create-project" method="POST">
+                    <div class="mb-3">
+                            <label for="projectName" class="form-label">Project Name</label>
+                            <input type="text" class="form-control" id="projectName" name="projectName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="duration" class="form-label">Duration</label>
+                            <input type="text" class="form-control" id="duration" name="duration" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="requiredSkills" class="form-label">Required Skills</label>
+                            <input type="text" class="form-control" id="requiredSkills" name="requiredSkills" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="aboutNgo" class="form-label">Description</label>
+                            <textarea class="form-control" id="aboutNgo" name="aboutNgo" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact" class="form-label">Contact</label>
+                            <input type="text" class="form-control" id="contact" name="contact" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bold-and-dark.js"></script>
+    <script>
+        document.getElementById("projectForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Fetch ngoName from the URL parameters again to ensure it's the latest value
+            const urlParams = new URLSearchParams(window.location.search);
+            const orgName = urlParams.get('ngoName'); // Make sure 'ngoName' is the correct URL parameter
+
+            // Get input field values from form
+            const projectName = document.getElementById("projectName").value;
+            const duration = document.getElementById("duration").value;
+            const requiredSkills = document.getElementById("requiredSkills").value;
+            const aboutNgo = document.getElementById("aboutNgo").value;
+            const contact = document.getElementById("contact").value;
+
+            // Create project object with input values and include orgName for the server
+            const projectData = {
+                projectName: projectName,
+                duration: duration,
+                requiredSkills: requiredSkills,
+                aboutNgo: aboutNgo,
+                contact: contact,
+                orgName: orgName // This should match with the server's expected property
+            };
+
+            console.log("Project Data:", projectData);
+            fetch('http://localhost:3000/create-project', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(projectData) // Convert projectData to JSON string
+            })
+                .then(response => {
+                    console.log("Response:", response);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Project created successfully');
+                    // Optionally, reset the form after successful submission
+                    document.getElementById("projectForm").reset();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error creating project. Please try again later.');
+                });
+            // Send POST request to backend endpoint
+            // The rest of the fetch call remains the same...
+        });
+
+        // document.getElementById("projectForm").addEventListener("submit", function(event) {
+        //     event.preventDefault(); // Prevent default form submission
+        //
+        //     // Get input field values
+        //     const projectName = document.getElementById("projectName").value;
+        //     const duration = document.getElementById("duration").value;
+        //     const requiredSkills = document.getElementById("requiredSkills").value;
+        //     const aboutNgo = document.getElementById("aboutNgo").value;
+        //     const contact = document.getElementById("contact").value;
+        //     const ngoName = document.getElementById("ngoName").textContent; // Get NGO name from the DOM
+        //
+        //     // Create project object with input values
+        //     const projectData = {
+        //         projectName: projectName,
+        //         duration: duration,
+        //         requiredSkills: requiredSkills,
+        //         aboutNgo: aboutNgo,
+        //         contact: contact,
+        //         ngoName: ngoName
+        //     };
+        //     console.log("Project Data:", projectData);
+        //
+        //     // Send POST request to backend endpoint
+        //     fetch('http://localhost:3000/create-project', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(projectData) // Convert projectData to JSON string
+        //     })
+        //         .then(response => {
+        //             console.log("Response:", response);
+        //             if (!response.ok) {
+        //                 throw new Error('Network response was not ok');
+        //             }
+        //             return response.json();
+        //         })
+        //         .then(data => {
+        //             alert('Project created successfully');
+        //             // Optionally, reset the form after successful submission
+        //             document.getElementById("projectForm").reset();
+        //         })
+        //         .catch(error => {
+        //             console.error('Error:', error);
+        //             alert('Error creating project. Please try again later.');
+        //         });
+        // });
+
+
+        // // Script to set the NGO's name in the welcome message
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     var ngoNameElement = document.getElementById("ngoName");
+        //     var urlParams = new URLSearchParams(window.location.search);
+        //     var ngoName = urlParams.get('ngoName'); // Make sure 'ngoName' is the correct URL parameter
+        //     ngoNameElement.textContent = ngoName;
+        //
+        //     // Also, verify here if ngoName is not undefined
+        //     console.log('NGO Name from URL parameter:', ngoName);
+        // });
+        document.addEventListener("DOMContentLoaded", function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var ngoId = urlParams.get('ngoId');
+            var ngoName = urlParams.get('ngoName');
+            console.log('NGO Name from URL parameter:', ngoName);
+            console.log('NGO id from URL parameter:', ngoId);
+
+            // Set the NGO name in the welcome message
+            document.getElementById("ngoName").textContent = ngoName;
+
+            // Update the 'Projects' link with the actual NGO ID and name
+            document.getElementById("projectsLink").href = `projects_ngo.html?ngoId=${ngoId}&ngoName=${encodeURIComponent(ngoName)}`;
+        });
+
+    </script>
+</body>
+
+</html>

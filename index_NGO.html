@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/bs-theme-overrides.css">
+</head>
+<script>
+    // Function to extract user details from URL query parameters
+    function getUserDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('ngoId');
+        const userName = urlParams.get('ngoName');
+
+        return { Id: userId, Name: userName };
+    }
+
+    // Function to dynamically generate link to About section with user details
+    function generateAboutLink() {
+        const userDetails = getUserDetails();
+        const aboutLink = `about_ngo.html?ngoId=${encodeURIComponent(userDetails.Id)}&ngoName=${encodeURIComponent(userDetails.Name)}`;
+        return aboutLink;
+    }
+
+    function generateProjectLink(){
+        const userDetails = getUserDetails();
+        const userLink = `projects_ngo.html?Id=${encodeURIComponent(userDetails.Id)}&Name=${encodeURIComponent(userDetails.Name)}`;
+        return userLink;
+
+    }
+
+    function generateFaq(){
+        const userDetails = getUserDetails();
+        const userLink = `faq_html.html?ngoId=${encodeURIComponent(userDetails.Id)}&ngoName=${encodeURIComponent(userDetails.Name)}`;
+        return userLink;
+
+    }
+
+    function generateindex(){
+        const userDetails = getUserDetails();
+        const userLink = `index_NGO.html?ngoId=${encodeURIComponent(userDetails.Id)}&ngoName=${encodeURIComponent(userDetails.Name)}`;
+        return userLink;
+
+
+    }
+
+    function generatedash(){
+        const userDetails = getUserDetails();
+        const userLink = `NGOdashboard.html?ngoId=${encodeURIComponent(userDetails.Id)}&ngoName=${encodeURIComponent(userDetails.Name)}`;
+        return userLink;
+
+
+    }
+</script>
+<body>
+<nav class="navbar navbar-expand-md sticky-top py-3 navbar-dark" id="mainNav" style="padding-right: 0px;margin-right: 1px;">
+    <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html"><span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon" style="background: var(--bs-body-bg);"><img src="assets/img/SAARTHI%20LOGO%201.png" width="33" height="33"></span><span>Saarthi</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link active" href="javascript:void(0)" onclick="location.href = generateindex()">Home</a></li>
+                <li class="nav-item"><a class="nav-link " href="javascript:void(0)" onclick="location.href = generateAboutLink()">About</a></li>
+
+
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="location.href = generateProjectLink()">Projects</a></li>
+                <li class="nav-item"></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="location.href = generateFaq()">FAQs</a></li>
+                <li class="nav-item"></li>
+                <li class="nav-item"></li>
+                <li class="nav-item"></li>
+
+            </ul><a onclick="location.href = generatedash();" style="cursor: pointer; font-size: 34px; color: var(--bs-primary);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 34px;color: var(--bs-primary);">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086 5 12 5C14.2091 5 16 6.79086 16 9ZM14 9C14 10.1046 13.1046 11 12 11C10.8954 11 10 10.1046 10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9Z" fill="currentColor"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM3 12C3 14.0902 3.71255 16.014 4.90798 17.5417C6.55245 15.3889 9.14627 14 12.0645 14C14.9448 14 17.5092 15.3531 19.1565 17.4583C20.313 15.9443 21 14.0524 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12ZM12 21C9.84977 21 7.87565 20.2459 6.32767 18.9878C7.59352 17.1812 9.69106 16 12.0645 16C14.4084 16 16.4833 17.1521 17.7538 18.9209C16.1939 20.2191 14.1881 21 12 21Z" fill="currentColor"></path>
+            </svg>
+        </a>
+        </div>
+    </div>
+</nav>
+<header class="bg-dark" style="background: #19181d;--bs-dark: #19181d;--bs-dark-rgb: 25,24,29;">
+    <div class="container pt-4 pt-xl-5">
+        <div class="row pt-5">
+            <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
+                <div class="text-center">
+                    <h1 class="fw-bold">The best solution for volunteering</h1>
+                </div>
+            </div>
+            <div class="col-12 col-lg-10 mx-auto">
+                <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
+                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"><img class="img-fluid" alt="man in blue t-shirt and blue shorts playing soccer on beach during daytime" data-bss-parallax="" data-bss-parallax-speed="0.8" src="assets/img/photo-1618477460930-d8bffff64172.jpg" width="417" height="625" style="border-radius: 24px;"></div>
+                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"><img class="img-fluid" alt="view of two persons hands" data-bss-parallax="" data-bss-parallax-speed="0.4" src="assets/img/photo-1578357078586-491adf1aa5ba.jpg" style="border-radius: 24px;" width="417" height="521"></div>
+                    <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"><img class="img-fluid" alt="five children smiling while doing peace hand sign" data-bss-parallax="" data-bss-parallax-speed="0.25" src="assets/img/photo-1488521787991-ed7bbaae773c.jpg" width="556" height="370" style="border-radius: 24px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="py-5" style="--bs-dark: #19181d;--bs-dark-rgb: 25,24,29;--bs-body-bg: #19181d;background: #19181d;">
+    <div class="container text-center py-5">
+        <p class="mb-4" style="font-size: 1.6rem;">Providing&nbsp;<span style="font-weight: bold;color: #f78533;">hundreds</span>&nbsp;of volunteering opportunities.</p><a href="#"> </a><a href="#"> </a><a href="#"> </a>
+    </div>
+</section>
+<section style="--bs-dark: #19181d;--bs-dark-rgb: 25,24,29;--bs-body-bg: #19181d;background: #19181d;">
+    <div class="container bg-dark py-5">
+        <div class="row">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h3 class="fw-bold">What we can do for you</h3>
+            </div>
+        </div>
+        <div class="py-5 p-lg-5">
+            <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+                <div class="col mb-5">
+                    <div class="card shadow-sm">
+                        <div class="card-body px-4 py-5 px-md-5">
+                            <div class="bs-icon-lg d-flex justify-content-center align-items-center mb-3 bs-icon" style="top: 1rem;right: 1rem;position: absolute;"><i class="fa fa-handshake-o" style="color: #f78533;"></i></div>
+                            <h5 class="fw-bold card-title" style="font-size: 18px;">Volunteer Opportunity Matching</h5>
+                            <p class="text-muted card-text mb-4">Match volunteers with suitable opportunities based on their skills and interests, streamlining the recruitment process for NGOs and ensuring a better fit for volunteers.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card shadow-sm">
+                        <div class="card-body px-4 py-5 px-md-5">
+                            <div class="bs-icon-lg d-flex justify-content-center align-items-center mb-3 bs-icon" style="top: 1rem;right: 1rem;position: absolute;"><i class="fa fa-address-book" style="color: #f78533;"></i></div>
+                            <h5 class="fw-bold card-title" style="font-size: 18px;">Volunteer Management Tools</h5>
+                            <p class="text-muted card-text mb-4">Provide tools for NGOs to schedule volunteers, assign tasks, and track volunteer hours, simplifying volunteer management and improving program efficiency.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card shadow-sm">
+                            <div class="card-body px-4 py-5 px-md-5" style="margin-bottom: -19px;">
+                                <div class="bs-icon-lg d-flex justify-content-center align-items-center mb-3 bs-icon" style="top: 1rem;right: 1rem;position: absolute;"><i class="fa fa-paper-plane" style="color: #f78533;"></i></div>
+                                <h5 class="fw-bold card-title" style="font-size: 18px;">Community Engagement and Networking</h5>
+                                <p class="text-muted card-text mb-4">Facilitate networking and collaboration among volunteers, NGOs, and stakeholders through forums, discussion boards, and networking events, fostering a sense of community and encouraging continued engagement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card shadow-sm">
+                            <div class="card-body px-4 py-5 px-md-5">
+                                <div class="bs-icon-lg d-flex justify-content-center align-items-center mb-3 bs-icon" style="top: 1rem;right: 1rem;position: absolute;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-fill" style="color: #f78533;">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path>
+                                </svg></div>
+                                <h5 class="fw-bold card-title" style="font-size: 18px;">Customized Volunteer Profiles</h5>
+                                <p class="text-muted card-text mb-4">Allow volunteers to create profiles showcasing their skills and past volunteer work, helping NGOs find the right volunteers for their projects and ensuring a better match between volunteers and opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section></section>
+<footer class="bg-dark">
+    <div class="container py-4 py-lg-5">
+        <hr>
+        <div class="text-muted d-flex justify-content-between align-items-center pt-3">
+            <p class="mb-0">Copyright © 2024 by Aditi, Kanishk, Rahul &amp; Yashila</p>
+            <ul class="list-inline mb-0"></ul>
+        </div>
+    </div>
+</footer>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/bold-and-dark.js"></script>
+</body>
+
+</html>

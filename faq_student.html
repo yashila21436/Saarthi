@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Testimonials - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/bs-theme-overrides.css">
+</head>
+<script>
+    // Function to extract user details from URL query parameters
+    function getUserDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('Id');
+        const userName = urlParams.get('Name');
+        const userEmail = urlParams.get('Email');
+        const userRollNo = urlParams.get('RollNo');
+        return { Id: userId, Name: userName, Email: userEmail, RollNo: userRollNo };
+    }
+
+    // Function to dynamically generate link to About section with user details
+    function generateAboutLink() {
+        const userDetails = getUserDetails();
+        const aboutLink = `studentDashboard.html?Id=${encodeURIComponent(userDetails.Id)}&Name=${encodeURIComponent(userDetails.Name)}&Email=${encodeURIComponent(userDetails.Email)}&RollNo=${encodeURIComponent(userDetails.RollNo)}`;
+        return aboutLink;
+    }
+
+    function generateProjectLink(){
+        const userDetails = getUserDetails();
+        const userLink = `projects_students.html?Id=${encodeURIComponent(userDetails.Id)}&Name=${encodeURIComponent(userDetails.Name)}&Email=${encodeURIComponent(userDetails.Email)}&RollNo=${encodeURIComponent(userDetails.RollNo)}`;
+        return userLink;
+
+    }
+
+    function generateFaq(){
+        const userDetails = getUserDetails();
+        const userLink = `faq_student.html?Id=${encodeURIComponent(userDetails.Id)}&Name=${encodeURIComponent(userDetails.Name)}&Email=${encodeURIComponent(userDetails.Email)}&RollNo=${encodeURIComponent(userDetails.RollNo)}`;
+        return userLink;
+
+    }
+
+    function generateindex(){
+        const userDetails = getUserDetails();
+        const userLink = `index_student.html?Id=${encodeURIComponent(userDetails.Id)}&Name=${encodeURIComponent(userDetails.Name)}&Email=${encodeURIComponent(userDetails.Email)}&RollNo=${encodeURIComponent(userDetails.RollNo)}`;
+        return userLink;
+
+
+    }
+</script>
+<body style="background: rgb(25,24,29);">
+<nav class="navbar navbar-expand-md sticky-top py-3 navbar-dark" id="mainNav" style="padding-right: 0px;margin-right: 1px;">
+    <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html"><span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon" style="background: var(--bs-body-bg);"><img src="assets/img/SAARTHI%20LOGO%201.png" width="33" height="33"></span><span>Saarthi</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="location.href = generateindex()">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="location.href = generateAboutLink()">About</a></li>
+
+
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="location.href = generateProjectLink()">Projects</a></li>
+                <li class="nav-item"></li>
+                <li class="nav-item"><a class="nav-link active" href="javascript:void(0)" onclick="location.href = generateFaq()">FAQs</a></li>
+                <li class="nav-item"></li>
+                <li class="nav-item"></li>
+                <li class="nav-item"></li>
+
+            </ul><a onclick="location.href = generateAboutLink();" style="cursor: pointer; font-size: 34px; color: var(--bs-primary);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 34px;color: var(--bs-primary);">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086 5 12 5C14.2091 5 16 6.79086 16 9ZM14 9C14 10.1046 13.1046 11 12 11C10.8954 11 10 10.1046 10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9Z" fill="currentColor"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM3 12C3 14.0902 3.71255 16.014 4.90798 17.5417C6.55245 15.3889 9.14627 14 12.0645 14C14.9448 14 17.5092 15.3531 19.1565 17.4583C20.313 15.9443 21 14.0524 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12ZM12 21C9.84977 21 7.87565 20.2459 6.32767 18.9878C7.59352 17.1812 9.69106 16 12.0645 16C14.4084 16 16.4833 17.1521 17.7538 18.9209C16.1939 20.2191 14.1881 21 12 21Z" fill="currentColor"></path>
+            </svg>
+        </a>
+        </div>
+    </div>
+</nav>
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold"><strong>Frequently Asked Questions</strong></h2>
+                <p style="color: rgb(180,180,180);">Based on the research conducted, here are a few answers to your questions!</p>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 d-sm-flex justify-content-sm-center">
+            <div class="col mb-4">
+                <div class="d-flex flex-column align-items-center align-items-sm-start">
+                    <div class="d-flex">
+                        <div></div>
+                    </div>
+                </div>
+                <p style="padding: 24px;background: #27262e;border-radius: 16px;color: #ffffff;text-align: center;font-weight: bold;">How can a student look for volunteering opportunities?</p>
+                <p style="text-align: center;">A student can look for the opportunities posted by multiple NGOs by browsing the available options in the "Projects" section. Since, majority of the students were dependent on university announcements and word of mouth, we decided to provide a platform that would streamline the process of volunteering.</p>
+            </div>
+            <div class="col mb-4">
+                <div class="d-flex flex-column align-items-center align-items-sm-start">
+                    <div class="d-flex">
+                        <div></div>
+                    </div>
+                </div>
+                <p style="padding: 24px;background: #27262e;border-radius: 16px;color: #ffffff;text-align: center;font-weight: bold;">How can I (student) ensure that my work hours will get added?</p>
+                <p style="text-align: center;">Once a student has completed his/her work, they need to make a request for adding the amount of hours that they have worked for on that particular day. This notification is sent to the NGO and then they can approve it. This ensures that the students' work gets recognized without any hassle.&nbsp;</p>
+            </div>
+            <div class="col mb-4">
+                <div class="d-flex flex-column align-items-center align-items-sm-start">
+                    <div class="d-flex">
+                        <div></div>
+                    </div>
+                </div>
+                <p style="padding: 24px;background: #27262e;border-radius: 16px;color: #ffffff;text-align: center;font-weight: bold;">When can I (student) expect to hear back from the NGO?</p>
+                <p style="text-align: center;">Once a student has applied for an opportunity, they can expect to hear back from the NGO in about a week.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="bg-dark">
+    <div class="container py-4 py-lg-5">
+        <hr>
+        <div class="text-muted d-flex justify-content-between align-items-center pt-3">
+            <p class="mb-0">Copyright © 2024 by Aditi, Kanishk, Rahul &amp; Yashila</p>
+            <ul class="list-inline mb-0"></ul>
+        </div>
+    </div>
+</footer>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/bold-and-dark.js"></script>
+</body>
+
+</html>

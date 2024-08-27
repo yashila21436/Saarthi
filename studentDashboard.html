@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Sign up - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/bs-theme-overrides.css">
+</head>
+
+<script>
+
+    function generateFaq(){
+        const userDetails = getUserDetails();
+        const userLink = `faq_student.html?Id=${encodeURIComponent(userDetails.Id)}&Name=${encodeURIComponent(userDetails.Name)}&Email=${encodeURIComponent(userDetails.Email)}&RollNo=${encodeURIComponent(userDetails.RollNo)}`;
+        return userLink;
+
+    }
+    // Function to extract user details from URL query parameters
+    function getUserDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('Id');
+        const userName = urlParams.get('Name');
+        const userEmail = urlParams.get('Email');
+        const userRollNo = urlParams.get('RollNo');
+        return { Id: userId, Name: userName, Email: userEmail, RollNo: userRollNo };
+    }
+
+    // Function to dynamically generate link to About section with user details
+    function generateAboutLink() {
+        const userDetails = getUserDetails();
+        const aboutLink = `about_student.html?Id=${encodeURIComponent(userDetails.Id)}&Name=${encodeURIComponent(userDetails.Name)}&Email=${encodeURIComponent(userDetails.Email)}&RollNo=${encodeURIComponent(userDetails.RollNo)}`;
+        return aboutLink;
+    }
+
+    function generateindex(){
+        const userDetails = getUserDetails();
+        const userLink = `index_student.html?Id=${encodeURIComponent(userDetails.Id)}&Name=${encodeURIComponent(userDetails.Name)}&Email=${encodeURIComponent(userDetails.Email)}&RollNo=${encodeURIComponent(userDetails.RollNo)}`;
+        return userLink;
+
+
+    }
+
+</script>
+
+
+<body>
+    <nav class="navbar navbar-expand-md sticky-top py-3 navbar-dark" id="mainNav" style="padding-right: 0px;margin-right: 1px;">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="indexLogin.html"><span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon" style="background: var(--bs-body-bg);"><img src="assets/img/SAARTHI%20LOGO%201.png" width="33" height="33"></span><span>Saarthi</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-3">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="location.href = generateindex()">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="location.href = generateAboutLink()">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects_students.html" id="projectsLink">Projects</a></li>
+
+                    <li class="nav-item"></li>
+                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="location.href = generateFaq()">FAQs</a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <div></div><a class="btn btn-primary shadow" role="button" href="loginStudent.html" style="color: rgb(255,255,255);">Sign out</a>
+            </div>
+        </div>
+    </nav>
+    <section class="py-5" style="background: #19181d;">
+        <div class="container py-5">
+            <div class="row mb-4 mb-lg-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 class="fw-bold">Welcome, <span id="studentName">Student</span>!</h2>
+                    <p>Email: <span id="studentEmail"></span></p>
+                    <p>Roll Number: <span id="studentRollNo"></span></p>
+
+
+
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col"><span>Note:&nbsp;</span><span>Select the offer after due diligence as after accepting you can't reject your offer and all other applications will be rejected automatically.</span></div>
+            </div>
+        </div>
+    </section>
+    <section class="py-5">
+        <div class="container">
+            <h2 class="fw-bold text-center text-white mb-4" style="font-size: 40px;"><strong>My Applied Projects</strong></h2>
+            <div id="appliedProjectList" class="row g-4"></div>
+        </div>
+    </section>
+
+
+    <footer class="bg-dark">
+        <div class="container py-4 py-lg-5">
+            <hr>
+            <div class="text-muted d-flex justify-content-between align-items-center pt-3">
+                <p class="mb-0">Copyright © 2024 by Aditi, Kanishk, Rahul &amp; Yashila</p>
+                <ul class="list-inline mb-0"></ul>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bold-and-dark.js"></script>
+    <script>
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        function updateNavigationLinks() {
+            const params = ['Id', 'Name', 'Email', 'RollNo'].reduce((acc, curr) => {
+                acc[curr] = getParameterByName(curr);
+                return acc;
+            }, {});
+
+            const links = document.querySelectorAll('a[href*="html"]');
+            links.forEach(link => {
+                let href = link.getAttribute('href');
+                if (href.includes('?')) { // If already has parameters, skip to avoid duplication
+                    return;
+                }
+                const queryParams = `?Id=${encodeURIComponent(params.Id)}&Name=${encodeURIComponent(params.Name)}&Email=${encodeURIComponent(params.Email)}&RollNo=${encodeURIComponent(params.RollNo)}`;
+                link.setAttribute('href', href + queryParams);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const studentName = getParameterByName('Name');
+            const studentEmail = getParameterByName('Email');
+            const studentRollNo = getParameterByName('RollNo');
+
+            document.getElementById('studentName').textContent = studentName || 'Default Name';
+            document.getElementById('studentEmail').textContent = studentEmail || 'Default Email';
+            document.getElementById('studentRollNo').textContent = studentRollNo || 'Default Roll No';
+        });
+    </script>
+
+    <script>
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        window.onload = function() {
+            // Retrieve name and email from URL parameters
+            var name = getParameterByName('Name');
+            var email = getParameterByName('Email');
+
+            // Set the text content of the identified elements
+            if (name) document.getElementById('studentName').textContent = name;
+            if (email) document.getElementById('studentEmail').textContent = email;
+        };
+    </script>
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        let studentId;
+
+        window.onload = function() {
+            studentId = getParameterByName('Id');
+            var id = getParameterByName('Id');
+            var name = getParameterByName('Name');
+            var email = getParameterByName('Email');
+            var rollNo = getParameterByName('RollNo');
+
+            var projectsLink = document.getElementById('projectsLink');
+            projectsLink.href = 'projects_students.html?Id=' + id + '&Name=' + encodeURIComponent(name) + '&Email=' + encodeURIComponent(email) + '&RollNo=' + rollNo; // Update the 'href' attribute
+            // Fetch applied projects and display them
+            fetch(`http://localhost:3000/applied-projects?studentId=${id}`)
+                .then(response => response.json())
+                .then(appliedProjects => {
+                    const appliedProjectList = document.getElementById("appliedProjectList");
+                    appliedProjectList.innerHTML = ''; // Clear existing entries
+
+                    if (appliedProjects.length === 0) {
+                        appliedProjectList.innerHTML = '<p class="text-white text-center">You have not applied to any projects yet.</p>';
+                        return;
+                    }
+
+                    console.log(appliedProjects);
+
+                    // ...existing window.onload function...
+
+                    appliedProjects.forEach(project => {
+                        const card = document.createElement("div");
+                        card.className = "col-md-4";
+                        let buttonsHtml = '';
+
+                        if (project.status === 'Accepted by NGO') {
+                            console.log(`project_id: ${project.project_id}`);
+                            buttonsHtml = `
+            <button class="btn btn-success" onclick="handleAccept(${project.project_id})">Accept</button>
+            <button class="btn btn-danger" onclick="handleReject(${project.project_id})">Reject</button>
+        `;
+                        }
+
+                        card.innerHTML = `
+        <div class="card h-100 bg-dark text-white">
+            <div class="card-body">
+                <h5 class="card-title"><strong>${project.project_name}</strong> - ${project.ngo_name}</h5>
+                <p class="card-text"><strong>About:</strong> ${project.about_ngo}</p>
+                <p class="card-text"><strong>Duration:</strong> ${project.duration}</p>
+                <p class="card-text"><strong>Skills Required:</strong> ${project.required_skills}</p>
+                <p class="card-text"><strong>Contact:</strong> ${project.contact}</p>
+                <p class="card-text"><strong>Skills Applied:</strong> ${project.applied_skills}</p>
+                <p class="card-text"><strong>Status:</strong> ${project.status}</p>
+                ${buttonsHtml}
+            </div>
+        </div>
+    `;
+                        appliedProjectList.appendChild(card);
+                    });
+
+// ...existing error handling...
+
+                })
+                .catch(error => {
+                    console.error('Failed to fetch applied projects:', error);
+                    appliedProjectList.innerHTML = '<p class="text-white text-center">Error loading applied projects.</p>';
+                });
+        };
+
+        function handleAccept(projectId) {
+            updateApplicationStatus(projectId, 'Accepted');
+        }
+
+        function handleReject(projectId) {
+            updateApplicationStatus(projectId, 'Rejected By Student');
+        }
+
+        function updateApplicationStatus(projectId, newStatus) {
+            console.log(`Updating application status to: ${newStatus}`);
+            console.log(`Student ID: ${studentId}`);
+            console.log(`Project ID:  ${projectId}`);
+            fetch(`http://localhost:3000/update-application-status-student`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    studentId: studentId,
+                    projectId: projectId,
+                    status: newStatus,
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json().catch(() => ({ message: response.statusText }));
+                    } else {
+                        throw new Error('Failed to fetch');
+                    }
+                })
+                .then(data => {
+                    alert(`Application status updated to: ${newStatus}`);
+                    location.reload(); // Reload the page to refresh the status
+                })
+                .catch(error => {
+                    console.error('Error updating application status:', error);
+                    alert('Failed to update application status.');
+                });
+        }
+
+    </script>
+
+
+</body>
+
+</html>

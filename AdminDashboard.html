@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet">
+    <style>
+        body {
+            background-color: #19181d;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            padding-top: 20px;
+            max-width: 800px;
+        }
+        .btn-custom {
+            margin-top: 10px;
+        }
+        .logout-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center mb-4">Admin Dashboard</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Download Excel Reports:</h3>
+            <button class="btn btn-primary btn-lg btn-block btn-custom" onclick="downloadStudentDetails()">Student Details</button>
+            <button class="btn btn-primary btn-lg btn-block btn-custom" onclick="downloadNGODetails()">NGO Details</button>
+            <button class="btn btn-primary btn-lg btn-block btn-custom" onclick="downloadProjectDetails()">Projects Details</button>
+            <button class="btn btn-primary btn-lg btn-block btn-custom" onclick="downloadComprehensiveReport()">Accepted Offers</button>
+            <button class="btn btn-primary btn-lg btn-block btn-custom" onclick="downloadCW()">Final CW Report</button>
+            <button class="btn btn-primary btn-lg btn-block btn-custom" onclick="downloadUnsatisfactoryReport()">Incomplete CW</button>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Ban Users:</h3>
+            <div class="mb-3">
+                <input type="text" id="studentId" class="form-control" placeholder="Enter Student ID">
+                <button class="btn btn-danger btn-lg btn-block btn-custom" onclick="banStudent('student', document.getElementById('studentId').value)">Ban Student</button>
+            </div>
+            <div>
+                <input type="text" id="ngoId" class="form-control" placeholder="Enter NGO ID">
+                <button class="btn btn-danger btn-lg btn-block btn-custom" onclick="banNgo()">Ban NGO</button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Button -->
+    <button class="btn btn-secondary logout-btn" onclick="logout()">Logout</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script></script>
+<script>
+    function downloadCW() {
+        // This should match the endpoint provided in your Node.js server
+        fetch('http://localhost:3000/download-cw-report')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to download the CW report');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                // Create a URL for the blob
+                const url = window.URL.createObjectURL(blob);
+                // Create a temporary link element
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'cw_report.xlsx'; // Corrected file name for CW Report
+                // Append the link to the body and trigger a click event to download the file
+                document.body.appendChild(a);
+                a.click();
+                // Cleanup: remove the temporary link and revoke the URL object
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to download the CW report. Please try again.');
+            });
+    }
+
+    function downloadUnsatisfactoryReport() {
+        fetch('http://localhost:3000/download-unsatisfactory-report')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to download the unsatisfactory report');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'unsatisfactory_report.xlsx'; // Correct file name
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to download the unsatisfactory report. Please try again.');
+            });
+    }
+
+
+    function downloadComprehensiveReport() {
+        // This should match the endpoint provided in your Node.js server
+        fetch('http://localhost:3000/download-comprehensive-report')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to download the comprehensive report');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                // Create a URL for the blob
+                const url = window.URL.createObjectURL(blob);
+                // Create a temporary link element
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'comprehensive_report.xlsx'; // Set the file name
+                // Append the link to the body and trigger a click event to download the file
+                document.body.appendChild(a);
+                a.click();
+                // Cleanup: remove the temporary link and revoke the URL object
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to download the comprehensive report. Please try again.');
+            });
+    }
+
+
+    function banNgo() {
+        var ngoId = document.getElementById('ngoId').value;
+        // Send a POST request to ban the NGO
+        $.ajax({
+            url: 'http://localhost:3000/ban-ngo',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ ngoId: ngoId }), // Correct key name to match server expectation
+            success: function(response) {
+                // Display success message
+                alert(response);
+                // Optionally redirect to the homepage or any other page
+                // window.location.href = 'index.html';
+            },
+            error: function(xhr, status, error) {
+                // Display error message
+                alert('Error banning NGO: ' + error);
+            }
+        });
+    }
+
+    function banStudent() {
+        var studentId = document.getElementById('studentId').value;
+        if (!studentId) {
+            alert("Please enter a Student ID.");
+            return;
+        }
+
+        // Send a POST request to ban the student
+        $.ajax({
+            url: 'http://localhost:3000/ban-student',  // Adjust this URL to your API endpoint if different
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ studentId: studentId }),
+            success: function(response) {
+                alert(response);
+                // Optionally reset the form or redirect
+                // document.getElementById('studentId').value = '';
+                // window.location.href = 'index.html'; // or another appropriate page
+            },
+            error: function(xhr, status, error) {
+                alert('Error banning student: ' + xhr.responseText);
+            }
+        });
+    }
+
+
+
+
+
+
+
+    function downloadProjectDetails() {
+        // Send a request to the backend endpoint to download project details
+        fetch('http://localhost:3000/download-project-details')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to download project details');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                // Create a temporary link to download the file
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'project_details.xlsx';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to download project details. Please try again.');
+            });
+    }
+
+    function downloadStudentDetails() {
+        // Send a GET request to the backend endpoint for downloading student details
+        fetch('http://localhost:3000/download-student-details')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to download student details');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                // Create a URL for the blob
+                const url = window.URL.createObjectURL(blob);
+                // Create a temporary link element
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'student_details.xlsx'; // Set the file name
+                // Append the link to the body and trigger a click event to download the file
+                document.body.appendChild(a);
+                a.click();
+                // Cleanup: remove the temporary link and revoke the URL object
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            })
+            .catch(error => {
+                console.error('Error downloading student details:', error);
+                // Display an error message to the user
+                alert('Failed to download student details. Please try again.');
+            });
+    }
+
+
+    function downloadNGODetails() {
+        // Send a GET request to the backend endpoint for downloading NGO details
+        fetch('http://localhost:3000/download-ngo-details')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to download NGO details');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                // Create a URL for the blob
+                const url = window.URL.createObjectURL(blob);
+                // Create a temporary link element
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'ngo_details.xlsx'; // Set the file name
+                // Append the link to the body and trigger a click event to download the file
+                document.body.appendChild(a);
+                a.click();
+                // Cleanup: remove the temporary link and revoke the URL object
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            })
+            .catch(error => {
+                console.error('Error downloading NGO details:', error);
+                // Display an error message to the user
+                alert('Failed to download NGO details. Please try again.');
+            });
+    }
+
+    function banUser(userType, userId) {
+        // Placeholder for ban functionality
+        console.log('Banning', userType, 'with ID:', userId);
+    }
+
+    function logout() {
+        // Placeholder for logout functionality
+        console.log('Logging out...');
+
+        sessionStorage.clear(); // Clear all session storage
+        // document.cookie = "sessionToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Clear a specific cookie
+
+        // After handling logout logic, redirect to the login page or home page
+        window.location.href = 'index.html';
+        // Redirect to logout endpoint or clear session and redirect to login page
+    }
+</script>
+</body>
+</html>
