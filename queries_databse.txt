@@ -1,0 +1,55 @@
+-- Create 'admins' table
+CREATE TABLE admins (
+    id INT,
+    email VARCHAR(255),
+    name VARCHAR(255),
+    password VARCHAR(255)
+);
+
+-- Create 'ngos' table
+CREATE TABLE ngos (
+    id INT,
+    orgName VARCHAR(255),
+    contactPerson VARCHAR(255),
+    contactInfo VARCHAR(255),
+    description TEXT,
+    email VARCHAR(255),
+    password VARCHAR(255),
+    active TINYINT
+);
+
+-- Create 'projects' table
+CREATE TABLE projects (
+    job_id INT,
+    project_name VARCHAR(255),
+    duration VARCHAR(255),
+    required_skills VARCHAR(255),
+    about_ngo TEXT,
+    contact VARCHAR(255),
+    ngo_id INT,
+    status TINYINT
+);
+
+-- Create 'student_project' table
+CREATE TABLE student_project (
+    student_id INT,
+    project_id INT,
+    student_name VARCHAR(255),
+    skills TEXT,
+    email_id VARCHAR(255),
+    status VARCHAR(255),
+    final TINYINT
+);
+
+-- Create 'students' table
+CREATE TABLE students (
+    id INT,
+    name VARCHAR(255),
+    first VARCHAR(255),
+    email VARCHAR(255),
+    last VARCHAR(255),
+    rollno VARCHAR(255),
+    batch INT,
+    password VARCHAR(255),
+    active TINYINT
+);
